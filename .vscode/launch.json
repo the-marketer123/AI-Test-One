@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open index.html (Opera GX)",
+            "file": "c:\\Users\\gm116\\OneDrive\\Documents\\GitHub\\AI-Test-One\\index.html",
+            "runtimeExecutable": "C:\\Users\\gm116\\AppData\\Local\\Programs\\Opera GX\\opera.exe"
+        }
+    ]
+}
