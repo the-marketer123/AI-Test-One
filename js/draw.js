@@ -5,7 +5,7 @@ function setup() {
     createCanvas(400, 400);
     frameRate(15);
 
-    population = new Population(500);
+    population = new Population(50);
 }
 
 function draw() {
