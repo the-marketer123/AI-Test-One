@@ -14,6 +14,8 @@ class Population {
         for (let s of this.snakes) {
             if (!s.dead) {
                 s.update();
+            } else {
+                s.fitness = 0;
             }
         }
 
@@ -38,7 +40,7 @@ class Population {
         for (let i = 0; i < this.size; i++) {
             let child = new SnakeAI();
             child.brain = elite.brain.copy();
-            child.brain.mutate(0.1);
+            child.brain.mutate(0.5);
             newSnakes.push(child);
         }
 

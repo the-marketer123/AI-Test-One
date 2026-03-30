@@ -1,7 +1,6 @@
 class SnakeAI {
     constructor() {
         this.stepsSinceFood = 0;
-        this.maxStepsWithoutFood = 50 + this.tail.length * 20;        
         this.pos = createVector(10, 10);
         this.vel = createVector(1, 0);
 
@@ -10,6 +9,7 @@ class SnakeAI {
             createVector(8,10),
             createVector(7,10),
         ];
+        this.maxStepsWithoutFood = 50 + this.tail.length * 20;        
 
         this.brain = new NeuralNetwork();
         this.dead = false;
@@ -31,9 +31,9 @@ class SnakeAI {
 
         this.move();
 
-        this.stepsSinceFood++; // ⏱️ increment timer
+        this.stepsSinceFood++; //  increment timer
 
-        this.checkFood();      // 👈 NEW
+        this.checkFood();      //  NEW
         this.checkDeath();
         this.fitness++;
         //this.fitness += floor(5 * (this.stepsSinceFood / this.maxStepsWithoutFood);
@@ -47,7 +47,7 @@ class SnakeAI {
             this.stepsSinceFood = 0;
 
             // reward fitness
-            this.fitness += 50;
+            this.fitness += 100;
 
             // new food
             this.food = createVector(floor(random(20)), floor(random(20)));
@@ -143,15 +143,17 @@ class SnakeAI {
     }
 
     draw() {
+        let lesserBound = windowWidth-windowHeight>0?windowHeight:windowWidth;
+        let length = lesserBound / 20
         fill(0,255,0);
-        rect(this.pos.x * 20, this.pos.y * 20, 20, 20);
+        rect(this.pos.x * length, this.pos.y * length, length, length);
 
         fill(0,200,0);
         for (let t of this.tail) {
-            rect(t.x * 20, t.y * 20, 20, 20);
+            rect(t.x * length, t.y * length, length, length);
         }
 
         fill(255,0,0);
-        rect(this.food.x * 20, this.food.y * 20, 20, 20);
+        rect(this.food.x * length, this.food.y * length, length, length);
     }
 }
