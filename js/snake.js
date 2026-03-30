@@ -35,8 +35,8 @@ class SnakeAI {
 
         this.checkFood();      // 👈 NEW
         this.checkDeath();
-        let starvation = this.stepsSinceFood / this.maxStepsWithoutFood;
-        this.fitness+= floor(5 * starvation);
+        this.fitness++;
+        //this.fitness += floor(5 * (this.stepsSinceFood / this.maxStepsWithoutFood);
     }
     checkFood() {
         if (this.pos.x === this.food.x && this.pos.y === this.food.y) {
