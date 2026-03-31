@@ -4,7 +4,7 @@ let showBestOnly = false;
 function setup() {
     let lesserBound = windowWidth-windowHeight>0?windowHeight:windowWidth;
     createCanvas(lesserBound, lesserBound);
-    frameRate(144);
+    frameRate(30);
 
     population = new Population(50);
 }
@@ -43,18 +43,18 @@ function drawOverlay() {
     textAlign(LEFT, TOP);
 
     let alive = population.snakes.filter(s => !s.dead).length;
-    let bestFitness = population.bestSnake ? population.bestSnake.fitness : 0;
-
     let best = population.bestSnake;
+    let bestFitness = best ? best.fitness : 0;
+    let bestScore = best ? best.score : 0;
     let starvation = best ? best.stepsSinceFood : 0;
     let minFood = best ? best.maxStepsWithoutFood : 0;
 
-    text("Hunger: " + starvation, 10, 90);
-    text("Hunger Limit: " + minFood, 10, 110);
     text("Generation: " + population.generation, 10, 10);
     text("Alive: " + alive, 10, 30);
     text("Best Fitness: " + floor(bestFitness), 10, 50);
-    text("Show Best Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 70);
+    text("Best Apples: " + bestScore, 10, 70);
+    text("Show Best Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
+    text("Hunger: " + starvation + " / " + minFood, 10, 110);
 }
 
 // 🔥 Toggle key
