@@ -18,7 +18,7 @@ class Population {
         }
 
         this.bestSnake = this.snakes.reduce((best, s) => {
-            return (!best || s.fitness > best.fitness) && !s.dead ? s : best;
+            return (!best || s.fitness > best.fitness) ? s : best;
         }, null);
     }
 
