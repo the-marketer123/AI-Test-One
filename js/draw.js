@@ -4,9 +4,9 @@ let showBestOnly = false;
 function setup() {
     let lesserBound = windowWidth-windowHeight>0?windowHeight:windowWidth;
     createCanvas(lesserBound, lesserBound);
-    frameRate(30);
+    frameRate(60);
 
-    population = new Population(50);
+    population = new Population(500);
 }
 
 function windowResized() {
@@ -57,9 +57,8 @@ function drawOverlay() {
     text("Hunger: " + starvation + " / " + minFood, 10, 110);
 }
 
-// 🔥 Toggle key
 function keyPressed() {
     if (key === 'b' || key === 'B') {
         showBestOnly = !showBestOnly;
-    }
+    }  
 }
