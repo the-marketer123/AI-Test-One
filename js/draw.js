@@ -6,7 +6,7 @@ function setup() {
     createCanvas(lesserBound, lesserBound);
     frameRate(30);
 
-    population = new Population(50);
+    population = new Population(500);
 }
 
 function windowResized() {
