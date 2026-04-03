@@ -30,7 +30,8 @@ class Population {
     }
 
     pickParent(pool) {
-        // pick top 20%
+        // pick some randomly from the top 20% pool
+        // more elite = higher pick chance
         let totalRank = (pool.length * (pool.length + 1)) / 2;
         let choice = random(totalRank);
 
@@ -50,14 +51,17 @@ class Population {
 
         this.snakes.sort((a, b) => b.fitness - a.fitness);
 
+        //pick 20% best
         let parentCount = Math.max(5, floor(this.size * 0.2));
         let parents = this.snakes.slice(0, parentCount);
         let elite = parents[0];
 
+        //new champ
         let champion = new SnakeAI();
         champion.brain = elite.brain.copy();
         newSnakes.push(champion);
 
+        //pick the parents randomly and create the children
         while (newSnakes.length < this.size) {
             let parent = this.pickParent(parents);
             let child = new SnakeAI();
@@ -87,8 +91,11 @@ class Population {
             let json = JSON.parse(data);
             let brain = NeuralNetwork.fromJSON(json);
             
-            // Replace the brain of the first snake with the loaded one
-            this.snakes[0].brain = brain;
+            // Replace the brain of the snaeks with the loaded best
+            this.snakes.forEach(b=>{
+                b.brain = brain;
+            })
+            //this.snakes[0].brain = brain;
             this.bestSnake = this.snakes[0];
             console.log('Best neural network loaded!');
             return true;
