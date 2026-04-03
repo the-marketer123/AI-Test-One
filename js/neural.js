@@ -11,6 +11,7 @@ class NeuralNetwork {
     }
 
     randomMatrix(rows, cols) {
+        //original variety
         let m = [];
         for (let i = 0; i < rows; i++) {
             m[i] = [];
@@ -22,6 +23,7 @@ class NeuralNetwork {
     }
 
     copy() {
+        //copy neural network
         let nn = new NeuralNetwork(this.input, this.hidden, this.output);
         nn.w1 = JSON.parse(JSON.stringify(this.w1));
         nn.w2 = JSON.parse(JSON.stringify(this.w2));
@@ -31,6 +33,7 @@ class NeuralNetwork {
     }
 
     toJSON() {
+        //turn it into json
         return {
             input: this.input,
             hidden: this.hidden,
@@ -43,6 +46,7 @@ class NeuralNetwork {
     }
 
     static fromJSON(json) {
+        //reload it from json
         let nn = new NeuralNetwork(json.input, json.hidden, json.output);
         nn.w1 = json.w1;
         nn.w2 = json.w2;
@@ -52,6 +56,7 @@ class NeuralNetwork {
     }
 
     mutate(rate = 0.12) {
+        //mutate
         function mutateVal(val) {
             if (random(1) < rate) {
                 return val + randomGaussian() * 0.2;
@@ -66,10 +71,12 @@ class NeuralNetwork {
     }
 
     activate(x) {
+        // activation function
         return Math.tanh(x);
     }
 
     predict(inputs) {
+        // run neural netowrk predictions
         let hidden = [];
         for (let i = 0; i < this.hidden; i++) {
             let sum = this.b1[i];

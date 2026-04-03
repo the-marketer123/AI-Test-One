@@ -20,6 +20,7 @@ class SnakeAI {
     }
 
     update() {
+        // self explanatory, updates everything
         if (this.dead) return;
 
         let previousDistance = this.getFoodDistance();
@@ -58,6 +59,7 @@ class SnakeAI {
     }
 
     applyAction(action) {
+        //use nerual networks decision to move
         let directions = [
             createVector(0, -1),
             createVector(0, 1),
@@ -75,6 +77,7 @@ class SnakeAI {
     }
 
     checkFood() {
+        //check for if eaten food
         if (this.pos.x === this.food.x && this.pos.y === this.food.y) {
             let growthSegment = this.tail.length > 0
                 ? this.tail[this.tail.length - 1].copy()
@@ -92,12 +95,14 @@ class SnakeAI {
     }
 
     move() {
+        //move tails
         this.tail.unshift(this.pos.copy());
         this.tail.pop();
         this.pos.add(this.vel);
     }
 
     checkDeath() {
+        //check if its dead
         if (this.pos.x < 0 || this.pos.y < 0 || this.pos.x >= 20 || this.pos.y >= 20) {
             this.dead = true;
         }
@@ -114,6 +119,7 @@ class SnakeAI {
     }
 
     spawnFood() {
+        //create new food
         let food;
         let valid = false;
 
@@ -135,15 +141,18 @@ class SnakeAI {
     }
 
     getFoodDistance() {
+        //check for the distance to the food currently
         return abs(this.food.x - this.pos.x) + abs(this.food.y - this.pos.y);
     }
 
     getHungerRatio() {
+        //how starved it is
         return constrain(this.stepsSinceFood / this.maxStepsWithoutFood, 0, 1);
     }
 
     // 🔥 29 INPUT SYSTEM
     getInputs() {
+        //record the 29 inputs
         let dirs = [
             createVector(1, 0), createVector(-1, 0),
             createVector(0, 1), createVector(0, -1),
@@ -169,6 +178,7 @@ class SnakeAI {
     }
 
     lookFor(target, dir) {
+        //check for stuff in the direction given
         let pos = this.pos.copy();
         let dist = 0;
 
@@ -184,6 +194,7 @@ class SnakeAI {
     }
 
     lookTail(dir) {
+        //look for the tails in the direction
         let pos = this.pos.copy();
         let dist = 0;
 
@@ -201,6 +212,7 @@ class SnakeAI {
     }
 
     lookWall(dir) {
+        //look for walls in a driection
         let pos = this.pos.copy();
         let dist = 0;
 
@@ -213,6 +225,7 @@ class SnakeAI {
     }
 
     draw() {
+        //draw everything
         let lesserBound = windowWidth - windowHeight > 0 ? windowHeight : windowWidth;
         let length = lesserBound / 20;
         fill(0, 255, 0);

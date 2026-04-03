@@ -11,22 +11,26 @@ class Population {
     }
 
     update() {
+        //ignore the dead
         for (let s of this.snakes) {
             if (!s.dead) {
                 s.update();
             }
         }
 
+        // choose the best
         this.bestSnake = this.snakes.reduce((best, s) => {
             return (!best || s.fitness > best.fitness) ? s : best;
         }, null);
     }
 
     allDead() {
+        // check for all dead
         return this.snakes.every(s => s.dead);
     }
 
     pickParent(pool) {
+        // pick top 20%
         let totalRank = (pool.length * (pool.length + 1)) / 2;
         let choice = random(totalRank);
 
@@ -41,6 +45,7 @@ class Population {
     }
 
     nextGeneration() {
+        // start next generation
         let newSnakes = [];
 
         this.snakes.sort((a, b) => b.fitness - a.fitness);
@@ -67,6 +72,7 @@ class Population {
     }
 
     saveBest() {
+        //save best neural netowrk to browser
         if (this.bestSnake) {
             let data = this.bestSnake.brain.toJSON();
             localStorage.setItem('bestNeuralNetwork', JSON.stringify(data));
@@ -75,6 +81,7 @@ class Population {
     }
 
     loadBest() {
+        // load best neural network from browser
         let data = localStorage.getItem('bestNeuralNetwork');
         if (data) {
             let json = JSON.parse(data);

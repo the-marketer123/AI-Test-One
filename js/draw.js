@@ -2,6 +2,7 @@ let population;
 let showBestOnly = false;
 
 function setup() {
+    //self explanatory, sets it up
     let lesserBound = windowWidth-windowHeight>0?windowHeight:windowWidth;
     createCanvas(lesserBound, lesserBound);
     frameRate(30);
@@ -13,6 +14,7 @@ function setup() {
 }
 
 function windowResized() {
+    //fix the size to display correctly
   let lesserBound = windowWidth-windowHeight>0?windowHeight:windowWidth;
   createCanvas(lesserBound, lesserBound);
 }
@@ -22,7 +24,7 @@ function draw() {
 
     population.update();
 
-    // DRAW SNAKES
+    // draw everything
     if (showBestOnly && population.bestSnake) {
         population.bestSnake.draw();
     } else {
@@ -41,6 +43,7 @@ function draw() {
 }
 
 function drawOverlay() {
+    // draw ui
     fill(255);
     textSize(14);
     textAlign(LEFT, TOP);
@@ -61,8 +64,8 @@ function drawOverlay() {
     text("Save Best (S) | Load Best (L)", 10, 130);
 }
 
-// 🔥 Toggle key
 function keyPressed() {
+    //check for keys being pressed
     if (key === 'b' || key === 'B') {
         showBestOnly = !showBestOnly;
     } else if (key === 's' || key === 'S') {
