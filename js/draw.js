@@ -10,7 +10,7 @@ function setup() {
     population = new Population(500);
     
     // Try to load saved best neural network
-    population.loadBest();
+    //population.loadBest();
 }
 
 function windowResized() {
