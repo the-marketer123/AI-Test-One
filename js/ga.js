@@ -65,4 +65,27 @@ class Population {
         this.bestSnake = this.snakes[0];
         this.generation++;
     }
+
+    saveBest() {
+        if (this.bestSnake) {
+            let data = this.bestSnake.brain.toJSON();
+            localStorage.setItem('bestNeuralNetwork', JSON.stringify(data));
+            console.log('Best neural network saved!');
+        }
+    }
+
+    loadBest() {
+        let data = localStorage.getItem('bestNeuralNetwork');
+        if (data) {
+            let json = JSON.parse(data);
+            let brain = NeuralNetwork.fromJSON(json);
+            
+            // Replace the brain of the first snake with the loaded one
+            this.snakes[0].brain = brain;
+            this.bestSnake = this.snakes[0];
+            console.log('Best neural network loaded!');
+            return true;
+        }
+        return false;
+    }
 }

@@ -30,6 +30,27 @@ class NeuralNetwork {
         return nn;
     }
 
+    toJSON() {
+        return {
+            input: this.input,
+            hidden: this.hidden,
+            output: this.output,
+            w1: this.w1,
+            w2: this.w2,
+            b1: this.b1,
+            b2: this.b2
+        };
+    }
+
+    static fromJSON(json) {
+        let nn = new NeuralNetwork(json.input, json.hidden, json.output);
+        nn.w1 = json.w1;
+        nn.w2 = json.w2;
+        nn.b1 = json.b1;
+        nn.b2 = json.b2;
+        return nn;
+    }
+
     mutate(rate = 0.12) {
         function mutateVal(val) {
             if (random(1) < rate) {

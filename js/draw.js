@@ -7,6 +7,9 @@ function setup() {
     frameRate(30);
 
     population = new Population(500);
+    
+    // Try to load saved best neural network
+    population.loadBest();
 }
 
 function windowResized() {
@@ -55,11 +58,16 @@ function drawOverlay() {
     text("Best Apples: " + bestScore, 10, 70);
     text("Show Best Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
     text("Hunger: " + starvation + " / " + minFood, 10, 110);
+    text("Save Best (S) | Load Best (L)", 10, 130);
 }
 
 // 🔥 Toggle key
 function keyPressed() {
     if (key === 'b' || key === 'B') {
         showBestOnly = !showBestOnly;
+    } else if (key === 's' || key === 'S') {
+        population.saveBest();
+    } else if (key === 'l' || key === 'L') {
+        population.loadBest();
     }
 }
