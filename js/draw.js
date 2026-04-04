@@ -7,7 +7,7 @@ function setup() {
     createCanvas(lesserBound, lesserBound);
     frameRate(30);
 
-    population = new Population(500);
+    population = new Population(1000);
     
     // Try to load saved best neural network
     //population.loadBest();
@@ -26,7 +26,10 @@ function draw() {
 
     // draw everything
     if (showBestOnly && population.bestSnake) {
-        population.bestSnake.draw();
+        let bestSnake = population.snakes.reduce((best, s) => {
+            return (!best || s.fitness > best.fitness) && !s.dead ? s : best;
+        }, null);
+        bestSnake.draw();
     } else {
         for (let s of population.snakes) {
             if (!s.dead) {
