@@ -29,7 +29,7 @@ function draw() {
         let bestSnake = population.snakes.reduce((best, s) => {
             return (!best || s.fitness > best.fitness) && !s.dead ? s : best;
         }, null);
-        bestSnake.draw();
+        if (bestSnake) bestSnake.draw();
     } else {
         for (let s of population.snakes) {
             if (!s.dead) {
@@ -62,7 +62,7 @@ function drawOverlay() {
     text("Alive: " + alive, 10, 30);
     text("Best Fitness: " + floor(bestFitness), 10, 50);
     text("Best Apples: " + bestScore, 10, 70);
-    text("Show Best Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
+    text("Show Best Alive Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
     text("Hunger: " + starvation + " / " + minFood, 10, 110);
     text("Save Best (S) | Load Best (L)", 10, 130);
 }
