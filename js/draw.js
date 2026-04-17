@@ -65,6 +65,7 @@ function drawOverlay() {
     text("Show Best Alive Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
     text("Hunger: " + starvation + " / " + minFood, 10, 110);
     text("Save Best (S) | Load Best (L) | Kill remaining(D)", 10, 130);
+    text("Increase Population (I) | Lower Population (O) (Shift for faster)", 10, 150);
 }
 
 function keyPressed() {
@@ -79,5 +80,13 @@ function keyPressed() {
         population.snakes.forEach(s=>{
             s.dead = true;
         })
+    } else if (key === 'i') {
+        population.size++;
+    } else if (key === 'I') {
+        population.size+=50;
+    } else if (key === 'o') {
+        population.size--;    
+    } else if (key === 'O') {
+        population.size-=50;
     }
 }
