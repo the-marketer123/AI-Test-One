@@ -83,30 +83,25 @@ class Population {
             console.log('Best neural network saved!');
         }
     }
-
     loadBest() {
-        // load best neural network from browser
         let data = localStorage.getItem('bestNeuralNetwork');
         if (data) {
             let json = JSON.parse(data);
             let brain = NeuralNetwork.fromJSON(json);
-            
-            // Replace the brain of half the snakes with the loaded best
-            let snakesAlive = 0;
-            this.snakes.forEach(s=>{
-                if (!s.dead) snakesAlive++;
-            })
-            for (let x = 0; x < snakesAlive / 2; x++) {
-                for (let y = 0; y < this.snakes.length / 2; y++) {
-                    if (this.snakes[y].dead) {
-                        x--;
-                    } else {
-                        this.snakes[y].brain = brain.copy();
-                    }
-                }
+    
+            // Filter ONLY alive snakes
+            let aliveSnakes = this.snakes.filter(s => !s.dead);
+    
+            // Replace half of the alive ones
+            let replaceCount = Math.floor(aliveSnakes.length / 2);
+    
+            for (let i = 0; i < replaceCount; i++) {
+                aliveSnakes[i].brain = brain.copy();
             }
-            //this.snakes[0].brain = brain;
-            this.bestSnake = this.snakes[0];
+    
+            // Optional: set best snake more intentionally
+            this.bestSnake = aliveSnakes[0] || null;
+    
             console.log('Best neural network loaded!');
             return true;
         }
