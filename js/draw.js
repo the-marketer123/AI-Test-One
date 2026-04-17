@@ -64,7 +64,7 @@ function drawOverlay() {
     text("Best Apples: " + bestScore, 10, 70);
     text("Show Best Alive Only (B): " + (showBestOnly ? "ON" : "OFF"), 10, 90);
     text("Hunger: " + starvation + " / " + minFood, 10, 110);
-    text("Save Best (S) | Load Best (L)", 10, 130);
+    text("Save Best (S) | Load Best (L) | Kill remaining(D)", 10, 130);
 }
 
 function keyPressed() {
@@ -75,5 +75,9 @@ function keyPressed() {
         population.saveBest();
     } else if (key === 'l' || key === 'L') {
         population.loadBest();
+    } else if (key === 'd' || key === 'D') {
+        population.snakes.forEach(s=>{
+            s.dead = true;
+        })
     }
 }
