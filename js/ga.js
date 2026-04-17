@@ -92,8 +92,18 @@ class Population {
             let brain = NeuralNetwork.fromJSON(json);
             
             // Replace the brain of half the snakes with the loaded best
-            for (let i = 0; i < this.snakes.length / 2; i++) {
-                this.snakes[i].brain = brain.copy();
+            let snakesAlive = 0;
+            this.snakes.forEach(s=>{
+                if (!s.dead) snakesAlive++;
+            })
+            for (let x = 0; x < snakesAlive / 2; x++) {
+                for (let y = 0; y < this.snakes.length / 2; y++) {
+                    if (this.snakes[y].dead) {
+                        x--;
+                    } else {
+                        this.snakes[y].brain = brain.copy();
+                    }
+                }
             }
             //this.snakes[0].brain = brain;
             this.bestSnake = this.snakes[0];
