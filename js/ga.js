@@ -12,9 +12,15 @@ class Population {
 
     update() {
         //ignore the dead
+        let alive = 0;
+        
+        this.snakes.forEach(s=>{
+            if (s.dead) alive++;
+        })
+        
         for (let s of this.snakes) {
             if (!s.dead) {
-                s.update();
+                s.update(alive);
             }
         }
 
