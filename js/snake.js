@@ -19,7 +19,7 @@ class SnakeAI {
         this.food = this.spawnFood();
     }
 
-    update() {
+    update(alive) {
         // self explanatory, updates everything
         if (this.dead) return;
 
@@ -34,9 +34,9 @@ class SnakeAI {
         this.stepsSinceFood++;
         let ateFood = this.checkFood();
         this.checkDeath();
-
+        
         if (this.dead) {
-            this.fitness -= 25;
+            this.fitness -= 25 * alive;
             return;
         }
 
